@@ -43,7 +43,7 @@ export default async function Header() {
             <UserAvatar src={userinfo && `/api/v1/users/${userinfo.sub}/avatar`} username={userinfo?.name ?? '?'} />
             <span className="text-base font-bold">{userinfo?.name}</span>
           </div>
-          <ul tabIndex={0} className="menu dropdown-content rounded-box bg-base-200 z-30 mt-2 w-60 p-2 shadow-lg">
+          <ul tabIndex={0} className="menu dropdown-content rounded-box bg-base-200 z-30 mt-2 w-48 p-2 shadow-lg">
             <li className="pointer-events-none">
               <div className="flex flex-col items-start gap-0 py-2">
                 <span className="font-bold">{userinfo?.name}</span>
