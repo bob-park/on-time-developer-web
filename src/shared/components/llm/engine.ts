@@ -1,4 +1,11 @@
-import { CreateWebWorkerMLCEngine, WebWorkerMLCEngine } from '@mlc-ai/web-llm';
+import {
+  AppConfig,
+  CreateWebWorkerMLCEngine,
+  WebWorkerMLCEngine,
+  deleteModelAllInfoInCache,
+  hasModelInCache,
+  prebuiltAppConfig,
+} from '@mlc-ai/web-llm';
 
 export type EngineModel = {
   id: string;
@@ -41,6 +48,20 @@ export const supportEngines = [
 
 export const DEFAULT_MODEL_ID = 'Qwen2.5-3B-Instruct-q4f16_1-MLC';
 
+export const ENGINE_APP_CONFIG: AppConfig = {
+  ...prebuiltAppConfig,
+  // web-llm 0.2.84 부터 useIndexedDBCache 대신 cacheBackend 사용
+  cacheBackend: 'indexeddb',
+};
+
+export function checkModelCached(modelId: string) {
+  return hasModelInCache(modelId, ENGINE_APP_CONFIG);
+}
+
+export function deleteModelCache(modelId: string) {
+  return deleteModelAllInfoInCache(modelId, ENGINE_APP_CONFIG);
+}
+
 type ProgressListener = (text: string, progress: number) => void;
 
 let enginePromise: Promise<WebWorkerMLCEngine> | null = null;
@@ -73,6 +94,7 @@ export function getEngine({ modelId = DEFAULT_MODEL_ID }: EngineProps) {
     currentModelId = modelId;
 
     const promise = CreateWebWorkerMLCEngine(worker, modelId, {
+      appConfig: ENGINE_APP_CONFIG,
       initProgressCallback: (p) => progressListeners.forEach((listener) => listener(p.text, p.progress)),
     }).catch((e) => {
       // 실패한 promise 를 캐싱하지 않아야 다음 호출에서 재시도할 수 있다
