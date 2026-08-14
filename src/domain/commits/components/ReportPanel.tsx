@@ -86,8 +86,10 @@ export default function ReportPanel({ from, to }: Readonly<{ from: string; to: s
       {status === 'unsupported' && <p className="text-warning text-sm">{t('unsupported')}</p>}
       {status === 'loading' && (
         <div className="flex flex-row items-center gap-2">
+          <span className="loading loading-spinner loading-xs" />
           <span className="text-xs opacity-60">{t('loading')}</span>
-          <progress className="progress progress-primary flex-1" value={progress} max={1} />
+          <progress className="progress progress-primary w-full max-w-64" value={progress} max={1} />
+          <span className="text-xs opacity-60">{Math.round(progress * 100)}%</span>
         </div>
       )}
 
