@@ -30,6 +30,7 @@ export default function WeeklyReportContents() {
           <DatePicker
             picker="week"
             allowClear={false}
+            showWeek={false}
             value={date}
             format={(value) => {
               const start = value.startOf('isoWeek');
