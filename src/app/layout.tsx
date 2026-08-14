@@ -13,6 +13,7 @@ import RQProvider from '@/shared/components/queries/RQProvider';
 import ToastProvider from '@/shared/components/toast/ToastProvider';
 import { LOCALE_META } from '@/shared/i18n/config';
 import { getUserLocale } from '@/shared/i18n/locale';
+import AntdProvider from '@/shared/providers/antd/AntdProvider';
 import { Theme } from '@/shared/providers/theme/ThemeProvider';
 
 import { NextIntlClientProvider } from 'next-intl';
@@ -54,15 +55,17 @@ export default async function RootLayout({
         <NextIntlClientProvider locale={locale} messages={messages}>
           <RQProvider>
             <HydrationBoundary state={dehydratedState}>
-              <OverlayProvider>
-                <ToastProvider limit={5} timeout={5}>
-                  <QueryErrorToast />
-                  <Header />
-                  <Contents>{children}</Contents>
-                  <Footer />
-                  <Chatbot />
-                </ToastProvider>
-              </OverlayProvider>
+              <AntdProvider current={theme}>
+                <OverlayProvider>
+                  <ToastProvider limit={5} timeout={5}>
+                    <QueryErrorToast />
+                    <Header />
+                    <Contents>{children}</Contents>
+                    <Footer />
+                    <Chatbot />
+                  </ToastProvider>
+                </OverlayProvider>
+              </AntdProvider>
             </HydrationBoundary>
           </RQProvider>
         </NextIntlClientProvider>
