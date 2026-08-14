@@ -8,7 +8,8 @@
 
 web-llm 의 `hasModelInCache` / `deleteModelAllInfoInCache` 로 현재 선택된 모델의
 다운로드 여부 표시(badge, light/dark 모두 눈에 띄게) + 캐시 삭제 기능.
-엔진은 `appConfig: { ...prebuiltAppConfig, useIndexedDBCache: true }` 로 생성.
+엔진은 IndexedDB 캐시 백엔드로 생성 — 설치된 web-llm 0.2.84 는 `useIndexedDBCache`
+대신 `cacheBackend: 'indexeddb'` 를 사용 (동일 의도).
 
 ## 설계
 
