@@ -39,7 +39,7 @@ export default async function Header() {
         <ThemeSwitcher current={theme} />
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn btn-circle btn-ghost">
-            <UserAvatar src={userinfo && `/api/v1/users/${userinfo.id}/avatar`} username={userinfo?.name ?? '?'} />
+            <UserAvatar src={userinfo && `/api/v1/users/${userinfo.sub}/avatar`} username={userinfo?.name ?? '?'} />
           </div>
           <ul tabIndex={0} className="menu dropdown-content rounded-box bg-base-200 z-10 mt-2 w-40 p-2 shadow-lg">
             <li className="menu-title">{userinfo?.name}</li>
