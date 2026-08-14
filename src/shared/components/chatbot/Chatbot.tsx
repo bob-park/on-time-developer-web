@@ -49,7 +49,7 @@ export default function Chatbot() {
   };
 
   return (
-    <div className="pointer-events-none fixed right-4 bottom-4 z-30 flex flex-col items-end gap-3">
+    <div className="pointer-events-none fixed right-5 bottom-4 z-30 flex flex-col items-end gap-3">
       <div
         className={cx(
           'card bg-base-200 pointer-events-auto flex h-[28rem] w-80 flex-col shadow-2xl transition-all duration-300',
