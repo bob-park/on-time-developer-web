@@ -13,13 +13,13 @@ export const supportEngines: EngineModel[] = [
     size: 4,
   },
   {
-    id: 'Qwen2.5-3B-Instruct-q4f16_1-MLC',
+    id: 'Qwen2.5-Coder-3B-Instruct-q4f16_1-MLC',
     displayName: 'Qwen2.5 3B',
     size: 8,
   },
 ];
 
-export const DEFAULT_MODEL_ID = 'Qwen2.5-1.5B-Instruct-q4f16_1-MLC';
+export const DEFAULT_MODEL_ID = 'Qwen2.5-Coder-3B-Instruct-q4f16_1-MLC';
 
 type ProgressListener = (text: string, progress: number) => void;
 
