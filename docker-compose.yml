@@ -1,0 +1,15 @@
+services:
+  web:
+    image: ghcr.io/bob-park/template-nextjs-app:${VERSION}
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+      args:
+        - GITHUB_NPM_AUTH_TOKEN=${GITHUB_NPM_AUTH_TOKEN}
+      x-bake:
+        platforms:
+          - linux/amd64
+          - linux/arm64
+        tags:
+          - ghcr.io/bob-park/template-nextjs-app:${VERSION}
+          - ghcr.io/bob-park/template-nextjs-app:latest
