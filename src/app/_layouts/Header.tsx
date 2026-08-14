@@ -35,11 +35,15 @@ export default async function Header() {
         <LanguageSwitcher />
         <ThemeSwitcher current={theme} />
         <div className="dropdown dropdown-end">
-          <div tabIndex={0} role="button" className="btn btn-ghost h-auto min-h-0 rounded-full py-1 pr-3 pl-1">
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn btn-ghost h-auto min-h-0 gap-2 rounded-full py-1.5 pr-5 pl-1.5"
+          >
             <UserAvatar src={userinfo && `/api/v1/users/${userinfo.sub}/avatar`} username={userinfo?.name ?? '?'} />
-            <span className="text-sm font-bold">{userinfo?.name}</span>
+            <span className="text-base font-bold">{userinfo?.name}</span>
           </div>
-          <ul tabIndex={0} className="menu dropdown-content rounded-box bg-base-200 z-30 mt-2 w-52 p-2 shadow-lg">
+          <ul tabIndex={0} className="menu dropdown-content rounded-box bg-base-200 z-30 mt-2 w-60 p-2 shadow-lg">
             <li className="pointer-events-none">
               <div className="flex flex-col items-start gap-0 py-2">
                 <span className="font-bold">{userinfo?.name}</span>
