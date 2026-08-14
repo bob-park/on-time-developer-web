@@ -7,7 +7,7 @@
     "dashboard": "대시보드",
     "commits": "커밋 목록",
     "dailyReport": "일일 보고",
-    "weeklyReport": "주간 작업 보고",
+    "weeklyReport": "주간 보고",
     "logout": "로그아웃"
   },
   "commits": {
@@ -37,7 +37,7 @@
   },
   "report": {
     "dailyTitle": "일일 보고",
-    "weeklyTitle": "주간 작업 보고",
+    "weeklyTitle": "주간 보고",
     "generate": "✨ 보고서 생성",
     "commits": "커밋 {count}건",
     "result": "생성된 보고서",
