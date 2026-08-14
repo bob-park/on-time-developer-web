@@ -51,7 +51,7 @@ export default async function Header() {
               </div>
             </li>
             <li className="border-base-300 mt-1 border-t pt-1">
-              <a href="/logout">
+              <a href="/logout" className="text-red-500 hover:bg-red-200">
                 <svg className="size-4" fill="none" stroke="currentColor" strokeWidth="1.7" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"

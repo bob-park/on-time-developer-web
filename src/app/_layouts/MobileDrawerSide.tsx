@@ -62,7 +62,7 @@ export default function MobileDrawerSide({
           <UserAvatar src={avatarSrc} username={username} />
           <div className="flex flex-col">
             <span className="text-sm font-bold">{username}</span>
-            <a href="/logout" className="link text-xs opacity-60">
+            <a href="/logout" className="link text-xs text-red-500 opacity-60 hover:bg-red-200">
               {t('logout')}
             </a>
           </div>
