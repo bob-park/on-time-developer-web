@@ -13,8 +13,6 @@ export default function Home() {
   // hooks
   const { status, progress, onChatCompletion, messages, isStreaming } = useWebLlm();
 
-  console.log(messages);
-
   return (
     <div className="flex size-full flex-col gap-3 p-4">
       <div className="w-full">
