@@ -93,14 +93,16 @@ export default function DashboardContents() {
       {/* daily bar chart */}
       <div className="card bg-base-200 p-5 shadow">
         <div className="mb-4 text-sm opacity-70">{t('dailyChart')}</div>
-        <div className="flex h-32 flex-row items-end gap-3">
+        <div className="flex flex-row items-end gap-3">
           {dailyCounts.map((day) => (
             <div key={day.label} className="flex flex-1 flex-col items-center gap-1">
               <span className="text-xs opacity-70">{day.count}</span>
-              <div
-                className="bg-primary w-full rounded-t"
-                style={{ height: `${(day.count / maxDaily) * 100}%`, opacity: day.count === maxDaily ? 1 : 0.55 }}
-              />
+              <div className="flex h-24 w-full items-end">
+                <div
+                  className="bg-primary w-full rounded-t"
+                  style={{ height: `${(day.count / maxDaily) * 100}%`, opacity: day.count === maxDaily ? 1 : 0.55 }}
+                />
+              </div>
               <span className="text-xs opacity-70">{day.label}</span>
             </div>
           ))}
