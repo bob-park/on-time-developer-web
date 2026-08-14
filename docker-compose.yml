@@ -1,6 +1,6 @@
 services:
   web:
-    image: ghcr.io/bob-park/template-nextjs-app:${VERSION}
+    image: ghcr.io/bob-park/on-time-developer-web:${VERSION}
     build:
       context: ./
       dockerfile: ./Dockerfile
@@ -11,5 +11,5 @@ services:
           - linux/amd64
           - linux/arm64
         tags:
-          - ghcr.io/bob-park/template-nextjs-app:${VERSION}
-          - ghcr.io/bob-park/template-nextjs-app:latest
+          - ghcr.io/bob-park/on-time-developer-web:${VERSION}
+          - ghcr.io/bob-park/on-time-developer-web:latest

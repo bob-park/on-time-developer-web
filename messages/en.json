@@ -1,6 +1,65 @@
 {
   "metadata": {
-    "title": "template nextjs app",
-    "description": "this is template nextjs app"
+    "title": "OnTime Developer",
+    "description": "this is OnTime Developer"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "commits": "Commits",
+    "dailyReport": "Daily Report",
+    "weeklyReport": "Weekly Report",
+    "logout": "Logout"
+  },
+  "commits": {
+    "title": "Commits",
+    "searchPlaceholder": "Search commit message",
+    "repoPlaceholder": "Repository",
+    "branchPlaceholder": "Branch",
+    "search": "Search",
+    "reset": "Reset",
+    "total": "{count} commits",
+    "empty": "No commits found."
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "weeklyCount": "Commits this week",
+    "vsLastWeek": "vs last week",
+    "topRepo": "Top repository this week",
+    "commitCount": "{count} commits",
+    "weekdays": "Mon,Tue,Wed,Thu,Fri,Sat,Sun",
+    "dailyChart": "Daily commits (this week)",
+    "repoDistribution": "Commits by repository (this week)",
+    "recentCommits": "Recent commits",
+    "viewAll": "View all →",
+    "writeDailyReport": "Write today's daily report",
+    "writeWeeklyReport": "Write this week's report",
+    "empty": "No commits this week."
+  },
+  "report": {
+    "dailyTitle": "Daily Report",
+    "weeklyTitle": "Weekly Report",
+    "generate": "✨ Generate report",
+    "commits": "{count} commits",
+    "result": "Generated report",
+    "copy": "Copy",
+    "copied": "Copied",
+    "loading": "Loading AI model (first time only)",
+    "unsupported": "This browser does not support AI features. Chrome is recommended.",
+    "empty": "No commits in this period.",
+    "placeholder": "Press the generate button to see the result here.",
+    "weekOfMonth": "{month} week {week}"
+  },
+  "chatbot": {
+    "title": "Support",
+    "placeholder": "Ask me anything",
+    "loading": "Loading AI model (first time only)",
+    "unsupported": "This browser does not support AI features. Chrome is recommended.",
+    "empty": "I can help you use OnTime Developer."
+  },
+  "common": {
+    "apiError": "Failed to load data."
+  },
+  "llm": {
+    "model": "LLM Model"
   }
 }

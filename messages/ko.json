@@ -1,6 +1,65 @@
 {
   "metadata": {
-    "title": "template nextjs 앱",
-    "description": "이것은 템플릿 nextjs 앱입니다."
+    "title": "OnTime Developer",
+    "description": "이것은 OnTime Developer 입니다."
+  },
+  "nav": {
+    "dashboard": "대시보드",
+    "commits": "커밋 목록",
+    "dailyReport": "일일 보고",
+    "weeklyReport": "주간 보고",
+    "logout": "로그아웃"
+  },
+  "commits": {
+    "title": "커밋 목록",
+    "searchPlaceholder": "커밋 메시지 검색",
+    "repoPlaceholder": "저장소",
+    "branchPlaceholder": "브랜치",
+    "search": "검색",
+    "reset": "초기화",
+    "total": "총 {count}건",
+    "empty": "커밋이 없습니다."
+  },
+  "dashboard": {
+    "title": "대시보드",
+    "weeklyCount": "이번주 커밋 수",
+    "vsLastWeek": "지난주 대비",
+    "topRepo": "이번주 최다 커밋",
+    "commitCount": "{count}건",
+    "weekdays": "월,화,수,목,금,토,일",
+    "dailyChart": "일일 커밋 수 (이번주)",
+    "repoDistribution": "이번주 저장소별 커밋",
+    "recentCommits": "최근 커밋",
+    "viewAll": "전체 보기 →",
+    "writeDailyReport": "오늘 일일 보고 작성",
+    "writeWeeklyReport": "이번주 주간 보고 작성",
+    "empty": "이번주 커밋이 없습니다."
+  },
+  "report": {
+    "dailyTitle": "일일 보고",
+    "weeklyTitle": "주간 보고",
+    "generate": "✨ 보고서 생성",
+    "commits": "커밋 {count}건",
+    "result": "생성된 보고서",
+    "copy": "복사",
+    "copied": "복사됨",
+    "loading": "AI 모델 로딩 중 (최초 1회)",
+    "unsupported": "이 브라우저는 AI 기능을 지원하지 않습니다. Chrome 사용을 권장합니다.",
+    "empty": "해당 기간에 커밋이 없습니다.",
+    "placeholder": "보고서 생성 버튼을 누르면 여기에 결과가 표시됩니다.",
+    "weekOfMonth": "{month} {week}주차"
+  },
+  "chatbot": {
+    "title": "고객지원",
+    "placeholder": "궁금한 것을 물어보세요",
+    "loading": "AI 모델 로딩 중 (최초 1회)",
+    "unsupported": "이 브라우저는 AI 기능을 지원하지 않습니다. Chrome 사용을 권장합니다.",
+    "empty": "OnTime Developer 사용법을 안내해 드려요."
+  },
+  "common": {
+    "apiError": "데이터를 불러오지 못했습니다."
+  },
+  "llm": {
+    "model": "LLM 모델"
   }
 }

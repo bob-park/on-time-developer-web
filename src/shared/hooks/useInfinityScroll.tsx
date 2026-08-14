@@ -27,7 +27,7 @@ export default function useInfinityScroll({
 
     const observer = new IntersectionObserver(
       async (entries) => {
-        const isExecute = entries.every((entry) => entry.intersectionRatio > options?.intersectionRatio);
+        const isExecute = entries.every((entry) => entry.intersectionRatio >= options.intersectionRatio);
 
         if (isExecute) {
           await onNext?.();

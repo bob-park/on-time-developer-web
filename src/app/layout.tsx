@@ -5,12 +5,16 @@ import { cookies } from 'next/headers';
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
 
 import Contents from '@/app/_layouts/Contents';
-import Footer from '@/app/_layouts/Footer';
 import Header from '@/app/_layouts/Header';
+import MobileDrawerSide from '@/app/_layouts/MobileDrawerSide';
+import { getUserinfo } from '@/shared/auth/serverAction';
+import Chatbot from '@/shared/components/chatbot/Chatbot';
+import QueryErrorToast from '@/shared/components/queries/QueryErrorToast';
 import RQProvider from '@/shared/components/queries/RQProvider';
 import ToastProvider from '@/shared/components/toast/ToastProvider';
 import { LOCALE_META } from '@/shared/i18n/config';
 import { getUserLocale } from '@/shared/i18n/locale';
+import AntdProvider from '@/shared/providers/antd/AntdProvider';
 import { Theme } from '@/shared/providers/theme/ThemeProvider';
 
 import { NextIntlClientProvider } from 'next-intl';
@@ -42,6 +46,8 @@ export default async function RootLayout({
   const messages = await getMessages();
   const htmlLang = LOCALE_META[locale].htmlLang;
 
+  const userinfo = await getUserinfo();
+
   const queryClient = new QueryClient();
 
   const dehydratedState = dehydrate(queryClient);
@@ -52,13 +58,25 @@ export default async function RootLayout({
         <NextIntlClientProvider locale={locale} messages={messages}>
           <RQProvider>
             <HydrationBoundary state={dehydratedState}>
-              <OverlayProvider>
-                <ToastProvider limit={5} timeout={5}>
-                  <Header />
-                  <Contents>{children}</Contents>
-                  <Footer />
-                </ToastProvider>
-              </OverlayProvider>
+              <AntdProvider current={theme} locale={locale}>
+                <OverlayProvider>
+                  <ToastProvider limit={5} timeout={5}>
+                    <QueryErrorToast />
+                    <div className="drawer">
+                      <input id="mobile-drawer" type="checkbox" className="drawer-toggle" />
+                      <div className="drawer-content flex min-h-screen flex-col">
+                        <Header />
+                        <Contents>{children}</Contents>
+                        <Chatbot />
+                      </div>
+                      <MobileDrawerSide
+                        username={userinfo?.name ?? '?'}
+                        avatarSrc={userinfo && `/api/v1/users/${userinfo.sub}/avatar`}
+                      />
+                    </div>
+                  </ToastProvider>
+                </OverlayProvider>
+              </AntdProvider>
             </HydrationBoundary>
           </RQProvider>
         </NextIntlClientProvider>
