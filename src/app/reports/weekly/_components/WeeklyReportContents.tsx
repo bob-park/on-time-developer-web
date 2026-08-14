@@ -5,16 +5,18 @@ import { useState } from 'react';
 import ReportPanel from '@/domain/commits/components/ReportPanel';
 import dayjs from '@/shared/dayjs';
 
+import { DatePicker } from 'antd';
+import type { Dayjs } from 'dayjs';
 import { useTranslations } from 'next-intl';
 
 export default function WeeklyReportContents() {
   // state
-  const [date, setDate] = useState<string>(dayjs().format('YYYY-MM-DD'));
+  const [date, setDate] = useState<Dayjs>(dayjs());
 
   // hooks
   const t = useTranslations('report');
 
-  const weekStart = dayjs(date).startOf('isoWeek');
+  const weekStart = date.startOf('isoWeek');
   const weekEnd = weekStart.endOf('isoWeek');
 
   return (
@@ -25,7 +27,7 @@ export default function WeeklyReportContents() {
           <span className="badge badge-ghost">
             {weekStart.format('YYYY-MM-DD')} ~ {weekEnd.format('YYYY-MM-DD')}
           </span>
-          <input className="input input-sm" type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+          <DatePicker picker="week" allowClear={false} value={date} onChange={(value) => value && setDate(value)} />
         </div>
       </div>
 

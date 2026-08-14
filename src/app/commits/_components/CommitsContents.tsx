@@ -5,28 +5,30 @@ import { useState } from 'react';
 import { CommitSearchRequest } from '@/domain/commits/apis/commits.dto';
 import CommitListItem from '@/domain/commits/components/CommitListItem';
 import { useCommits } from '@/domain/commits/queries/commits';
-import dayjs from '@/shared/dayjs';
 import useInfinityScroll from '@/shared/hooks/useInfinityScroll';
 
+import { DatePicker } from 'antd';
+import type { Dayjs } from 'dayjs';
 import { useTranslations } from 'next-intl';
+
+const { RangePicker } = DatePicker;
 
 type FilterFields = {
   commitMessage: string;
   repo: string;
   branch: string;
-  from: string;
-  to: string;
+  range: [Dayjs, Dayjs] | null;
 };
 
-const EMPTY_FILTER: FilterFields = { commitMessage: '', repo: '', branch: '', from: '', to: '' };
+const EMPTY_FILTER: FilterFields = { commitMessage: '', repo: '', branch: '', range: null };
 
 function toSearchRequest(fields: FilterFields): CommitSearchRequest {
   return {
     commitMessage: fields.commitMessage || undefined,
     repo: fields.repo || undefined,
     branch: fields.branch || undefined,
-    createdDateFrom: fields.from ? dayjs(fields.from).startOf('day').format('YYYY-MM-DDTHH:mm:ss') : undefined,
-    createdDateTo: fields.to ? dayjs(fields.to).endOf('day').format('YYYY-MM-DDTHH:mm:ss') : undefined,
+    createdDateFrom: fields.range ? fields.range[0].startOf('day').format('YYYY-MM-DDTHH:mm:ss') : undefined,
+    createdDateTo: fields.range ? fields.range[1].endOf('day').format('YYYY-MM-DDTHH:mm:ss') : undefined,
   };
 }
 
@@ -85,9 +87,10 @@ export default function CommitsContents() {
           onChange={handleChange('branch')}
           placeholder={t('branchPlaceholder')}
         />
-        <input className="input input-sm" type="date" value={fields.from} onChange={handleChange('from')} />
-        <span className="opacity-60">~</span>
-        <input className="input input-sm" type="date" value={fields.to} onChange={handleChange('to')} />
+        <RangePicker
+          value={fields.range}
+          onChange={(value) => setFields((prev) => ({ ...prev, range: value as [Dayjs, Dayjs] | null }))}
+        />
         <button type="submit" className="btn btn-primary btn-sm">
           {t('search')}
         </button>
