@@ -2,5 +2,12 @@
   "metadata": {
     "title": "template nextjs app",
     "description": "this is template nextjs app"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "commits": "Commits",
+    "dailyReport": "Daily Report",
+    "weeklyReport": "Weekly Report",
+    "logout": "Logout"
   }
 }

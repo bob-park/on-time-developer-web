@@ -2,5 +2,12 @@
   "metadata": {
     "title": "template nextjs 앱",
     "description": "이것은 템플릿 nextjs 앱입니다."
+  },
+  "nav": {
+    "dashboard": "대시보드",
+    "commits": "커밋 목록",
+    "dailyReport": "일일 보고",
+    "weeklyReport": "주간 작업 보고",
+    "logout": "로그아웃"
   }
 }
