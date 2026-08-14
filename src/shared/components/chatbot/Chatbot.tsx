@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import useWebLlm from '@/shared/components/llm/useWebLlm';
 
@@ -19,6 +19,9 @@ OnTime Developer 는 개발자의 커밋 내역을 조회하고 AI 로 업무 �
 - 테마(라이트/다크)와 언어는 우측 상단에서 변경한다. 로그아웃은 우측 상단 아바타 메뉴에 있다.`;
 
 export default function Chatbot() {
+  // ref
+  const messagesRef = useRef<HTMLDivElement>(null);
+
   // state
   const [open, setOpen] = useState<boolean>(false);
   const [input, setInput] = useState<string>('');
@@ -26,6 +29,11 @@ export default function Chatbot() {
   // hooks
   const t = useTranslations('chatbot');
   const { status, progress, messages, isStreaming, onChatCompletion } = useWebLlm();
+
+  // useEffect
+  useEffect(() => {
+    messagesRef.current?.scrollTo({ top: messagesRef.current.scrollHeight });
+  }, [messages]);
 
   // handle
   const handleSubmit = (e: React.FormEvent) => {
@@ -50,7 +58,7 @@ export default function Chatbot() {
             </button>
           </div>
 
-          <div className="flex-1 overflow-y-auto px-3">
+          <div ref={messagesRef} className="flex-1 overflow-y-auto px-3">
             {messages.length === 0 && <p className="text-sm opacity-60">{t('empty')}</p>}
             {messages.map((message) => (
               <div key={message.id} className={cx('chat', message.type === 'user' ? 'chat-end' : 'chat-start')}>
