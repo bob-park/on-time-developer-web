@@ -16,8 +16,7 @@ type ChatMessages = {
 };
 
 export default function useWebLlm(modelId?: string) {
-  // useState
-  const [isSupport, setIsSupport] = useState<boolean>(false);
+  // state
   const [status, setStatus] = useState<EngineStatus>('loading');
   const [isStreaming, setIsStreaming] = useState<boolean>(false);
   const [progress, setProgress] = useState<number>(0);
@@ -25,17 +24,8 @@ export default function useWebLlm(modelId?: string) {
 
   // useEffect
   useEffect(() => {
-    if (!('gpu' in navigator)) {
+    if (!('gpu' in navigator) || !navigator.userAgent.includes('Chrome')) {
       setStatus('unsupported');
-      return;
-    }
-
-    const ua = navigator.userAgent;
-
-    // 현재 크롬만 지원가능하도록
-    if (!ua.includes('Chrome')) {
-      setIsSupport(false);
-
       return;
     }
 
@@ -43,72 +33,64 @@ export default function useWebLlm(modelId?: string) {
   }, []);
 
   // handle
-  const handleChatCompletion = async ({ system = '', user }: { system?: string; user: string }) => {
-    // add user message
-    setMessages((prev) => {
-      const newMessages = prev.slice();
-
-      newMessages.push({
-        id: uuid(),
-        type: 'user',
-        message: user,
-        date: new Date(),
-      });
-
-      return newMessages;
-    });
-
+  const handleGenerate = async ({
+    system = '',
+    user,
+    onDelta,
+  }: {
+    system?: string;
+    user: string;
+    onDelta?: (fullText: string) => void;
+  }) => {
     setIsStreaming(true);
 
-    const engine = await getEngine({ modelId });
+    try {
+      const engine = await getEngine({ modelId });
 
-    const stream = await engine.chat.completions.create({
-      messages: [
-        { role: 'system', content: system },
-        { role: 'user', content: user },
-      ],
-      temperature: 0.3,
-      stream: true,
-    });
-
-    const nowMessageId = uuid();
-
-    setMessages((prev) => {
-      const newMessages = prev.slice();
-
-      newMessages.push({
-        id: nowMessageId,
-        type: 'assistant',
-        message: '',
-        date: new Date(),
+      const stream = await engine.chat.completions.create({
+        messages: [
+          { role: 'system', content: system },
+          { role: 'user', content: user },
+        ],
+        temperature: 0.3,
+        stream: true,
       });
 
-      return newMessages;
-    });
+      let fullText = '';
 
-    for await (const chunk of stream) {
-      console.log(chunk.choices[0].delta.content);
+      for await (const chunk of stream) {
+        fullText += chunk.choices[0].delta.content ?? '';
+        onDelta?.(fullText);
+      }
 
-      setMessages((prev) => {
-        const newMessages = prev.slice();
-
-        const index = prev.findIndex((item) => item.id === nowMessageId);
-
-        const newMessage = prev[index];
-
-        console.log(index, newMessage);
-
-        newMessages.splice(index, 1, {
-          ...newMessage,
-          message: newMessage.message + (chunk.choices[0].delta.content ?? ''),
-        });
-
-        return newMessages;
-      });
+      return fullText;
+    } finally {
+      setIsStreaming(false);
     }
-
-    setIsStreaming(false);
   };
 
-  return { isSupport, status, progress, messages, isStreaming, onChatCompletion: handleChatCompletion };
+  const handleChatCompletion = async ({ system = '', user }: { system?: string; user: string }) => {
+    const userMessage: ChatMessages = { id: uuid(), type: 'user', message: user, date: new Date() };
+    const assistantMessage: ChatMessages = { id: uuid(), type: 'assistant', message: '', date: new Date() };
+
+    setMessages((prev) => [...prev, userMessage, assistantMessage]);
+
+    await handleGenerate({
+      system,
+      user,
+      onDelta: (fullText) =>
+        setMessages((prev) =>
+          prev.map((item) => (item.id === assistantMessage.id ? { ...item, message: fullText } : item)),
+        ),
+    });
+  };
+
+  return {
+    status,
+    progress,
+    messages,
+    isStreaming,
+    onChatCompletion: handleChatCompletion,
+    onGenerate: handleGenerate,
+  };
 }
