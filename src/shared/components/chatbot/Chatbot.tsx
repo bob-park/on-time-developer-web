@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 
+import ModelSelect from '@/shared/components/llm/ModelSelect';
 import useWebLlm from '@/shared/components/llm/useWebLlm';
 
 import cx from 'classnames';
@@ -51,9 +52,10 @@ export default function Chatbot() {
     <div className="fixed right-4 bottom-4 z-30 flex flex-col items-end gap-3">
       {open && (
         <div className="card bg-base-200 flex h-[28rem] w-80 flex-col shadow-2xl max-sm:fixed max-sm:inset-0 max-sm:h-full max-sm:w-full max-sm:rounded-none">
-          <div className="flex flex-row items-center justify-between p-3">
-            <span className="font-bold">💬 {t('title')}</span>
-            <button type="button" className="btn btn-ghost btn-sm btn-circle" onClick={() => setOpen(false)}>
+          <div className="flex flex-row items-center justify-between gap-2 p-3">
+            <span className="flex-none font-bold">💬 {t('title')}</span>
+            <ModelSelect disabled={isStreaming} />
+            <button type="button" className="btn btn-ghost btn-sm btn-circle flex-none" onClick={() => setOpen(false)}>
               ✕
             </button>
           </div>

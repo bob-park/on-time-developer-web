@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Commit } from '@/domain/commits/apis/commits.dto';
 import CommitListItem from '@/domain/commits/components/CommitListItem';
 import { usePeriodCommits } from '@/domain/commits/queries/commits';
+import ModelSelect from '@/shared/components/llm/ModelSelect';
 import useWebLlm from '@/shared/components/llm/useWebLlm';
 
 import { useTranslations } from 'next-intl';
@@ -59,17 +60,20 @@ export default function ReportPanel({ from, to }: Readonly<{ from: string; to: s
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex flex-row items-center justify-between">
+      <div className="flex flex-row flex-wrap items-center justify-between gap-2">
         <span className="text-sm opacity-70">{t('commits', { count: commits.length })}</span>
-        <button
-          type="button"
-          className="btn btn-primary btn-sm"
-          disabled={status !== 'ready' || isStreaming || isLoading || commits.length === 0}
-          onClick={handleGenerate}
-        >
-          {isStreaming && <span className="loading loading-spinner loading-xs" />}
-          {t('generate')}
-        </button>
+        <div className="flex flex-row items-center gap-2">
+          <ModelSelect disabled={isStreaming} />
+          <button
+            type="button"
+            className="btn btn-primary btn-sm"
+            disabled={status !== 'ready' || isStreaming || isLoading || commits.length === 0}
+            onClick={handleGenerate}
+          >
+            {isStreaming && <span className="loading loading-spinner loading-xs" />}
+            {t('generate')}
+          </button>
+        </div>
       </div>
 
       {status === 'unsupported' && <p className="text-warning text-sm">{t('unsupported')}</p>}
