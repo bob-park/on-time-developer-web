@@ -52,7 +52,7 @@ export default function Chatbot() {
     <div className="pointer-events-none fixed right-5 bottom-4 z-30 flex flex-col items-end gap-3">
       <div
         className={cx(
-          'card bg-base-200 pointer-events-auto flex h-[28rem] w-80 flex-col shadow-2xl transition-all duration-300',
+          'card bg-base-200 pointer-events-auto flex h-[28rem] w-[340px] flex-col shadow-2xl transition-all duration-300',
           'max-sm:fixed max-sm:inset-0 max-sm:h-full max-sm:w-full max-sm:rounded-none',
           open ? 'visible translate-y-0 opacity-100' : 'invisible translate-y-6 opacity-0 max-sm:translate-y-full',
         )}
