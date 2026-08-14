@@ -7,6 +7,7 @@ import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query
 import Contents from '@/app/_layouts/Contents';
 import Footer from '@/app/_layouts/Footer';
 import Header from '@/app/_layouts/Header';
+import Chatbot from '@/shared/components/chatbot/Chatbot';
 import RQProvider from '@/shared/components/queries/RQProvider';
 import ToastProvider from '@/shared/components/toast/ToastProvider';
 import { LOCALE_META } from '@/shared/i18n/config';
@@ -57,6 +58,7 @@ export default async function RootLayout({
                   <Header />
                   <Contents>{children}</Contents>
                   <Footer />
+                  <Chatbot />
                 </ToastProvider>
               </OverlayProvider>
             </HydrationBoundary>

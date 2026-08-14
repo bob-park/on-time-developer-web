@@ -9,5 +9,12 @@
     "dailyReport": "Daily Report",
     "weeklyReport": "Weekly Report",
     "logout": "Logout"
+  },
+  "chatbot": {
+    "title": "Support",
+    "placeholder": "Ask me anything",
+    "loading": "Loading AI model (first time only)",
+    "unsupported": "This browser does not support AI features. Chrome is recommended.",
+    "empty": "I can help you use OnTime Developer."
   }
 }
