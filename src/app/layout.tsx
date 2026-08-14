@@ -58,7 +58,7 @@ export default async function RootLayout({
         <NextIntlClientProvider locale={locale} messages={messages}>
           <RQProvider>
             <HydrationBoundary state={dehydratedState}>
-              <AntdProvider current={theme}>
+              <AntdProvider current={theme} locale={locale}>
                 <OverlayProvider>
                   <ToastProvider limit={5} timeout={5}>
                     <QueryErrorToast />
