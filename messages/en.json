@@ -56,10 +56,6 @@
     "unsupported": "This browser does not support AI features. Chrome is recommended.",
     "empty": "I can help you use OnTime Developer."
   },
-  "llm": {
-    "downloaded": "Downloaded",
-    "deleteCache": "Delete model cache"
-  },
   "common": {
     "apiError": "Failed to load data."
   }
