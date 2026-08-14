@@ -40,10 +40,12 @@ export default function DashboardContents() {
 
   const topRepoBranch = countBy(thisWeek, (commit) => `${commit.repo}|${commit.branch}`)[0];
 
+  const weekdays = t('weekdays').split(',');
+
   const dailyCounts = Array.from({ length: 7 }, (_, index) => {
     const day = WEEK_START.add(index, 'day');
     return {
-      label: day.format('dd'),
+      label: weekdays[index],
       count: thisWeek.filter((commit) => dayjs(commit.createdDate).isSame(day, 'day')).length,
     };
   });
@@ -79,7 +81,7 @@ export default function DashboardContents() {
             <>
               <div className="truncate text-lg font-bold">{topRepoBranch[0].split('|')[0]}</div>
               <div className="text-sm opacity-70">
-                {topRepoBranch[0].split('|')[1]} · {topRepoBranch[1]} commits
+                {topRepoBranch[0].split('|')[1]} · {t('commitCount', { count: topRepoBranch[1] })}
               </div>
             </>
           ) : (

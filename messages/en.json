@@ -25,6 +25,8 @@
     "weeklyCount": "Commits this week",
     "vsLastWeek": "vs last week",
     "topRepo": "Top repository this week",
+    "commitCount": "{count} commits",
+    "weekdays": "Mon,Tue,Wed,Thu,Fri,Sat,Sun",
     "dailyChart": "Daily commits (this week)",
     "repoDistribution": "Commits by repository (this week)",
     "recentCommits": "Recent commits",

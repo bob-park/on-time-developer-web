@@ -25,6 +25,8 @@
     "weeklyCount": "이번주 커밋 수",
     "vsLastWeek": "지난주 대비",
     "topRepo": "이번주 최다 커밋",
+    "commitCount": "{count}건",
+    "weekdays": "월,화,수,목,금,토,일",
     "dailyChart": "일일 커밋 수 (이번주)",
     "repoDistribution": "이번주 저장소별 커밋",
     "recentCommits": "최근 커밋",
