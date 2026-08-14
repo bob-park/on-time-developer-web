@@ -8,8 +8,8 @@ export default function CommitListItem({ commit }: Readonly<{ commit: Commit }>)
       <div className="flex flex-row flex-wrap items-center gap-2 text-xs opacity-70">
         <span className="badge badge-sm badge-ghost">{commit.repo}</span>
         <span className="badge badge-sm badge-ghost">{commit.branch}</span>
+        <span className="badge badge-sm badge-ghost">{commit.author}</span>
         <span className="font-mono">{commit.commitId.slice(0, 7)}</span>
-        <span>{commit.author}</span>
         <span>{dayjs(commit.createdDate).format('YYYY-MM-DD HH:mm')}</span>
       </div>
     </div>
