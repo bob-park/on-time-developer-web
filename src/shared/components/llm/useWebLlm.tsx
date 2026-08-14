@@ -29,7 +29,9 @@ export default function useWebLlm(modelId?: string) {
       return;
     }
 
-    getEngine({ modelId }, (_, p) => setProgress(p)).then(() => setStatus('ready'));
+    getEngine({ modelId }, (_, p) => setProgress(p))
+      .then(() => setStatus('ready'))
+      .catch(() => setStatus('unsupported'));
   }, []);
 
   // handle

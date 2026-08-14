@@ -4,6 +4,9 @@ import { getCommits } from '@/domain/commits/apis/commits';
 import { Commit, CommitSearchRequest } from '@/domain/commits/apis/commits.dto';
 import { getNextPageParams } from '@/shared/api';
 import { PageRequest, PagedModel } from '@/shared/api/common.dto';
+import dayjs from '@/shared/dayjs';
+
+const DEFAULT_SORT = ['createdDate,desc'];
 
 export function useCommits(params: CommitSearchRequest) {
   const { data, fetchNextPage, hasNextPage, isLoading } = useInfiniteQuery<
@@ -18,8 +21,9 @@ export function useCommits(params: CommitSearchRequest) {
     initialPageParam: {
       size: 25,
       page: 0,
+      sort: DEFAULT_SORT,
     },
-    getNextPageParam: (lastPage) => getNextPageParams<Commit>(lastPage),
+    getNextPageParam: (lastPage) => getNextPageParams<Commit>(lastPage, DEFAULT_SORT),
   });
 
   const commits = (data?.pages || []).reduce((current, value) => current.concat(value.content), [] as Commit[]);
@@ -39,8 +43,9 @@ export function usePeriodCommits(from: string, to: string) {
         page: 0,
         // ponytail: 기간 내 1000건 초과분은 통계에서 잘림 — 집계 API 생기면 교체
         size: 1_000,
-        sort: ['createdDate,desc'],
+        sort: DEFAULT_SORT,
       }),
+    enabled: dayjs(from).isValid() && dayjs(to).isValid(),
   });
 
   return { commits: data?.content ?? [], isLoading };

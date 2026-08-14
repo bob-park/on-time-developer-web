@@ -54,5 +54,8 @@
     "loading": "AI 모델 로딩 중 (최초 1회)",
     "unsupported": "이 브라우저는 AI 기능을 지원하지 않습니다. Chrome 사용을 권장합니다.",
     "empty": "OnTime Developer 사용법을 안내해 드려요."
+  },
+  "common": {
+    "apiError": "데이터를 불러오지 못했습니다."
   }
 }

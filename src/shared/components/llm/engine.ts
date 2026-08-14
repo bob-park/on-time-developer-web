@@ -21,7 +21,11 @@ export function getEngine(
       {
         initProgressCallback: (p) => onProgress?.(p.text, p.progress),
       },
-    );
+    ).catch((e) => {
+      // 실패한 promise 를 캐싱하지 않아야 다음 호출에서 재시도할 수 있다
+      enginePromise = null;
+      throw e;
+    });
   }
   return enginePromise;
 }
