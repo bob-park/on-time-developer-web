@@ -1,3 +1,5 @@
+import CommitsContents from './_components/CommitsContents';
+
 export default function CommitsPage() {
-  return <div className="p-6" />;
+  return <CommitsContents />;
 }

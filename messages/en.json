@@ -10,6 +10,16 @@
     "weeklyReport": "Weekly Report",
     "logout": "Logout"
   },
+  "commits": {
+    "title": "Commits",
+    "searchPlaceholder": "Search commit message",
+    "repoPlaceholder": "Repository",
+    "branchPlaceholder": "Branch",
+    "search": "Search",
+    "reset": "Reset",
+    "total": "{count} commits",
+    "empty": "No commits found."
+  },
   "chatbot": {
     "title": "Support",
     "placeholder": "Ask me anything",

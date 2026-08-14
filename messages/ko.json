@@ -10,6 +10,16 @@
     "weeklyReport": "주간 작업 보고",
     "logout": "로그아웃"
   },
+  "commits": {
+    "title": "커밋 목록",
+    "searchPlaceholder": "커밋 메시지 검색",
+    "repoPlaceholder": "저장소",
+    "branchPlaceholder": "브랜치",
+    "search": "검색",
+    "reset": "초기화",
+    "total": "총 {count}건",
+    "empty": "커밋이 없습니다."
+  },
   "chatbot": {
     "title": "고객지원",
     "placeholder": "궁금한 것을 물어보세요",
