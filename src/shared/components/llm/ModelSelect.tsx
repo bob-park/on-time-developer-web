@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { checkModelCached, deleteModelCache, subscribeProgress, supportEngines } from '@/shared/components/llm/engine';
 import { useStore } from '@/shared/store/rootStore';
 
+import cx from 'classnames';
 import { useTranslations } from 'next-intl';
 
 export default function ModelSelect({ disabled }: Readonly<{ disabled?: boolean }>) {
@@ -48,6 +49,13 @@ export default function ModelSelect({ disabled }: Readonly<{ disabled?: boolean 
   }, [refreshCached]);
 
   // handle
+  const handleSelect = (id: string) => {
+    setLlmModelId(id);
+
+    // daisyUI focus dropdown 닫기
+    (document.activeElement as HTMLElement | null)?.blur();
+  };
+
   const handleDelete = async () => {
     try {
       await deleteModelCache(modelId);
@@ -57,22 +65,38 @@ export default function ModelSelect({ disabled }: Readonly<{ disabled?: boolean 
     }
   };
 
+  const currentEngine = supportEngines.find((engine) => engine.id === modelId);
+  const isDisabled = disabled || isBusy;
+
   return (
     <div className="flex flex-row items-center gap-2">
-      <select
-        className="select select-sm w-48"
-        aria-label="AI model"
-        value={modelId}
-        disabled={disabled || isBusy}
-        onChange={(e) => setLlmModelId(e.target.value)}
-      >
-        {supportEngines.map((engine) => (
-          <option key={engine.id} value={engine.id}>
-            {engine.displayName}
-            {cachedIds.has(engine.id) ? ` · ${t('downloaded')}` : ''}
-          </option>
-        ))}
-      </select>
+      <div className="dropdown">
+        <div
+          tabIndex={isDisabled ? -1 : 0}
+          role="button"
+          aria-label="AI model"
+          className={cx('btn btn-sm w-52 justify-between font-normal', isDisabled && 'btn-disabled')}
+        >
+          <span className="truncate">{currentEngine?.displayName}</span>
+          {cachedIds.has(modelId) && <span className="badge badge-success badge-xs flex-none">{t('downloaded')}</span>}
+        </div>
+        <ul tabIndex={0} className="menu dropdown-content rounded-box bg-base-200 z-30 mt-1 w-60 p-2 shadow-lg">
+          {supportEngines.map((engine) => (
+            <li key={engine.id}>
+              <button
+                type="button"
+                className="flex flex-row items-center justify-between gap-2"
+                onClick={() => handleSelect(engine.id)}
+              >
+                <span className="truncate">{engine.displayName}</span>
+                {cachedIds.has(engine.id) && (
+                  <span className="badge badge-success badge-xs flex-none">{t('downloaded')}</span>
+                )}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
 
       {cachedIds.has(modelId) && (
         <button
