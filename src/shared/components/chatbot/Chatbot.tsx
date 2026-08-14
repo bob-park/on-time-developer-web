@@ -50,56 +50,60 @@ export default function Chatbot() {
 
   return (
     <div className="fixed right-4 bottom-4 z-30 flex flex-col items-end gap-3">
-      {open && (
-        <div className="card bg-base-200 flex h-[28rem] w-80 flex-col shadow-2xl max-sm:fixed max-sm:inset-0 max-sm:h-full max-sm:w-full max-sm:rounded-none">
-          <div className="flex flex-row items-center justify-between gap-2 p-3">
-            <span className="flex-none font-bold">💬 {t('title')}</span>
-            <ModelSelect disabled={isStreaming} />
-            <button type="button" className="btn btn-ghost btn-sm btn-circle flex-none" onClick={() => setOpen(false)}>
-              ✕
-            </button>
-          </div>
-
-          <div ref={messagesRef} className="flex-1 overflow-y-auto px-3">
-            {messages.length === 0 && <p className="text-sm opacity-60">{t('empty')}</p>}
-            {messages.map((message) => (
-              <div key={message.id} className={cx('chat', message.type === 'user' ? 'chat-end' : 'chat-start')}>
-                <div
-                  className={cx(
-                    'chat-bubble text-sm whitespace-pre-wrap',
-                    message.type === 'user' && 'chat-bubble-primary',
-                  )}
-                >
-                  {message.message}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="p-3">
-            {status === 'unsupported' && <p className="text-warning text-sm">{t('unsupported')}</p>}
-            {status === 'loading' && (
-              <div className="flex flex-row items-center gap-2">
-                <span className="text-xs opacity-60">{t('loading')}</span>
-                <progress className="progress progress-primary flex-1" value={progress} max={1} />
-              </div>
-            )}
-            {status === 'ready' && (
-              <form className="flex flex-row gap-2" onSubmit={handleSubmit}>
-                <input
-                  className="input input-sm flex-1"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  placeholder={t('placeholder')}
-                />
-                <button type="submit" className="btn btn-primary btn-sm" disabled={isStreaming || !input.trim()}>
-                  ➤
-                </button>
-              </form>
-            )}
-          </div>
+      <div
+        className={cx(
+          'card bg-base-200 flex h-[28rem] w-80 flex-col shadow-2xl transition-all duration-300',
+          'max-sm:fixed max-sm:inset-0 max-sm:h-full max-sm:w-full max-sm:rounded-none',
+          open ? 'visible translate-y-0 opacity-100' : 'invisible translate-y-6 opacity-0 max-sm:translate-y-full',
+        )}
+      >
+        <div className="flex flex-row items-center justify-between gap-2 p-3">
+          <span className="flex-none font-bold">💬 {t('title')}</span>
+          <ModelSelect disabled={isStreaming} />
+          <button type="button" className="btn btn-ghost btn-sm btn-circle flex-none" onClick={() => setOpen(false)}>
+            ✕
+          </button>
         </div>
-      )}
+
+        <div ref={messagesRef} className="flex-1 overflow-y-auto px-3">
+          {messages.length === 0 && <p className="text-sm opacity-60">{t('empty')}</p>}
+          {messages.map((message) => (
+            <div key={message.id} className={cx('chat', message.type === 'user' ? 'chat-end' : 'chat-start')}>
+              <div
+                className={cx(
+                  'chat-bubble text-sm whitespace-pre-wrap',
+                  message.type === 'user' && 'chat-bubble-primary',
+                )}
+              >
+                {message.message}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="p-3">
+          {status === 'unsupported' && <p className="text-warning text-sm">{t('unsupported')}</p>}
+          {status === 'loading' && (
+            <div className="flex flex-row items-center gap-2">
+              <span className="text-xs opacity-60">{t('loading')}</span>
+              <progress className="progress progress-primary flex-1" value={progress} max={1} />
+            </div>
+          )}
+          {status === 'ready' && (
+            <form className="flex flex-row gap-2" onSubmit={handleSubmit}>
+              <input
+                className="input input-sm flex-1"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder={t('placeholder')}
+              />
+              <button type="submit" className="btn btn-primary btn-sm" disabled={isStreaming || !input.trim()}>
+                ➤
+              </button>
+            </form>
+          )}
+        </div>
+      </div>
 
       <button
         type="button"
