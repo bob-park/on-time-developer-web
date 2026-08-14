@@ -1,6 +1,7 @@
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 
+import DrawerToggle from '@/app/_layouts/DrawerToggle';
 import HeaderNav from '@/app/_layouts/HeaderNav';
 import UserAvatar from '@/domain/users/components/UserAvatar';
 import { getUserinfo } from '@/shared/auth/serverAction';
@@ -22,11 +23,7 @@ export default async function Header() {
   return (
     <header className="navbar bg-base-200 sticky top-0 z-20 shadow-md">
       <div className="flex flex-1 flex-row items-center gap-2">
-        <label htmlFor="mobile-drawer" className="btn btn-ghost btn-square md:hidden" aria-label="open menu">
-          <svg className="size-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-            <path strokeLinecap="round" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </label>
+        <DrawerToggle />
         <Link href="/" className="flex flex-row items-center gap-2 px-2">
           <span className="bg-primary size-6 rounded-full" aria-hidden />
           <span className="text-lg font-bold">OnTime Developer</span>

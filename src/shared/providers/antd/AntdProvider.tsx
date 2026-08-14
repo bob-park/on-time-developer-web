@@ -1,5 +1,6 @@
 'use client';
 
+import '@/shared/dayjs';
 import { Locale } from '@/shared/i18n/config';
 import { Theme } from '@/shared/providers/theme/ThemeProvider';
 
