@@ -24,34 +24,14 @@ export const supportEngines = [
     displayName: 'Qwen2.5 3B',
     size: 8,
   },
-  {
-    id: 'Qwen2.5-7B-Instruct-q4f16_1-MLC',
-    displayName: 'Qwen2.5 7B',
-    size: 16,
-  },
-  {
-    id: 'Qwen3-0.6B-q4f16_1-MLC',
-    displayName: 'Qwen3 0.6B',
-    size: 4,
-  },
-  {
-    id: 'Qwen3-4B-q4f32_1-MLC',
-    displayName: 'Qwen3 4B',
-    size: 16,
-  },
-  {
-    id: 'Qwen3-8B-q4f32_1-MLC',
-    displayName: 'Qwen3 8B',
-    size: 16,
-  },
 ];
 
 export const DEFAULT_MODEL_ID = 'Qwen2.5-1.5B-Instruct-q4f16_1-MLC';
 
 export const ENGINE_APP_CONFIG: AppConfig = {
   ...prebuiltAppConfig,
-  // web-llm 0.2.84 부터 useIndexedDBCache 대신 cacheBackend 사용
-  cacheBackend: 'indexeddb',
+  // 기본 Cache API 백엔드 사용 (IndexedDB 미사용)
+  cacheBackend: 'cache',
 };
 
 export function checkModelCached(modelId: string) {
