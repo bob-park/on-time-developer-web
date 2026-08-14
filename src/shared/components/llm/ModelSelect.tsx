@@ -45,9 +45,14 @@ export default function ModelSelect({ disabled }: Readonly<{ disabled?: boolean 
 
   // handle
   const handleDelete = async () => {
-    await deleteModelCache(modelId);
-
-    setIsCached(await checkModelCached(modelId));
+    try {
+      await deleteModelCache(modelId);
+    } finally {
+      // 삭제 실패해도 실제 캐시 상태로 badge 를 되돌린다
+      checkModelCached(modelId)
+        .then((cached) => setIsCached(cached))
+        .catch(() => {});
+    }
   };
 
   return (
@@ -74,8 +79,8 @@ export default function ModelSelect({ disabled }: Readonly<{ disabled?: boolean 
             className="btn btn-ghost btn-xs btn-square text-error"
             aria-label={t('deleteCache')}
             title={t('deleteCache')}
-            disabled={isBusy}
-            onClick={() => void handleDelete()}
+            disabled={isBusy || disabled}
+            onClick={() => void handleDelete().catch(() => {})}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
