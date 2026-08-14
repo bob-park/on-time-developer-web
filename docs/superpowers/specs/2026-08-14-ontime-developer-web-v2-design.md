@@ -46,8 +46,8 @@ v1 구현에 대한 UI 개선 + 버그 수정. 신규 dependency 는 antd 관련
 
 ## 5. Date Picker — antd
 
-- 신규 dependency: `antd`, `@ant-design/v5-patch-for-react-19` (React 19.2 필수 패치).
-  antd v5 는 dayjs 기반 — 기존 dayjs 와 호환.
+- 신규 dependency: `antd` (v6 — React 19 네이티브 지원이라 별도 패치 불필요).
+  antd 는 dayjs 기반 — 기존 dayjs 와 호환.
 - 적용 위치:
   - 일일 보고: `DatePicker` (single) — 기존 `<input type="date">` 교체
   - 주간 보고: `DatePicker picker="week"` — 주 선택 UX 를 antd 위크 피커로
