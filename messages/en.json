@@ -46,7 +46,8 @@
     "loading": "Loading AI model (first time only)",
     "unsupported": "This browser does not support AI features. Chrome is recommended.",
     "empty": "No commits in this period.",
-    "placeholder": "Press the generate button to see the result here."
+    "placeholder": "Press the generate button to see the result here.",
+    "weekOfMonth": "{month} week {week}"
   },
   "chatbot": {
     "title": "Support",

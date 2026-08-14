@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import { Commit } from '@/domain/commits/apis/commits.dto';
 import CommitListItem from '@/domain/commits/components/CommitListItem';
+import ReportMarkdown from '@/domain/commits/components/ReportMarkdown';
 import { usePeriodCommits } from '@/domain/commits/queries/commits';
 import ModelSelect from '@/shared/components/llm/ModelSelect';
 import useWebLlm from '@/shared/components/llm/useWebLlm';
@@ -22,9 +23,10 @@ const SYSTEM_PROMPT = `너는 개발자의 커밋 내역으로 업무 보고서�
 
 규칙:
 - 저장소별로 ## 섹션을 만든다. 입력에 나온 저장소 순서를 유지한다.
-- 각 저장소 안에서 관련 있는 커밋끼리 작업 단위로 묶어 ### 소제목을 붙인다.
-- 각 작업 단위 아래에는 커밋 메시지를 그대로 나열하지 말고, 무엇을 했는지 1~2문장으로 요약한 설명을 불릿으로 쓴다.
-- 모든 커밋이 어느 작업 단위엔가 반영되어야 한다. 없는 내용을 지어내지 않는다.`;
+- 각 저장소 안에서 관련 있는 커밋끼리 작업 단위로 묶어 ### 소제목을 붙인다. 소제목은 2~6단어로 간결하게 쓴다.
+- 각 작업 단위 아래 불릿은 무엇을 했는지 요약한 설명이다. 반드시 20자 이내로 쓴다.
+- "feat:", "fix:", "refactor:", "build:", "docs:" 같은 커밋 prefix 는 결과에 절대 포함하지 않는다.
+- 커밋 메시지를 그대로 옮겨 적지 않는다. 모든 커밋이 어느 작업 단위엔가 반영되어야 한다. 없는 내용을 지어내지 않는다.`;
 
 function toPromptInput(commits: Commit[]) {
   return commits
@@ -99,9 +101,9 @@ export default function ReportPanel({ from, to }: Readonly<{ from: string; to: s
               📋 {isCopied ? t('copied') : t('copy')}
             </button>
           </div>
-          <pre className="flex-1 overflow-y-auto p-4 pt-0 font-sans text-sm whitespace-pre-wrap">
-            {report || <span className="opacity-50">{t('placeholder')}</span>}
-          </pre>
+          <div className="flex-1 overflow-y-auto p-4 pt-0 text-sm">
+            {report ? <ReportMarkdown markdown={report} /> : <span className="opacity-50">{t('placeholder')}</span>}
+          </div>
         </div>
       </div>
     </div>

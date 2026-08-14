@@ -46,7 +46,8 @@
     "loading": "AI 모델 로딩 중 (최초 1회)",
     "unsupported": "이 브라우저는 AI 기능을 지원하지 않습니다. Chrome 사용을 권장합니다.",
     "empty": "해당 기간에 커밋이 없습니다.",
-    "placeholder": "보고서 생성 버튼을 누르면 여기에 결과가 표시됩니다."
+    "placeholder": "보고서 생성 버튼을 누르면 여기에 결과가 표시됩니다.",
+    "weekOfMonth": "{month} {week}주차"
   },
   "chatbot": {
     "title": "고객지원",
