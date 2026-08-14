@@ -6,6 +6,7 @@ import { useStore } from '@/shared/store/rootStore';
 export default function ModelSelect({ disabled }: Readonly<{ disabled?: boolean }>) {
   // store
   const modelId = useStore((state) => state.llm.modelId);
+  const isBusy = useStore((state) => state.llm.isBusy);
   const setLlmModelId = useStore((state) => state.setLlmModelId);
 
   return (
@@ -13,7 +14,7 @@ export default function ModelSelect({ disabled }: Readonly<{ disabled?: boolean 
       className="select select-sm w-40"
       aria-label="AI model"
       value={modelId}
-      disabled={disabled}
+      disabled={disabled || isBusy}
       onChange={(e) => setLlmModelId(e.target.value)}
     >
       {supportEngines.map((engine) => (

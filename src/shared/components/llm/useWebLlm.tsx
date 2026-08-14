@@ -26,6 +26,7 @@ export default function useWebLlm() {
 
   // store
   const modelId = useStore((state) => state.llm.modelId);
+  const setLlmBusy = useStore((state) => state.setLlmBusy);
 
   // useEffect
   useEffect(() => {
@@ -57,6 +58,7 @@ export default function useWebLlm() {
     onDelta?: (fullText: string) => void;
   }) => {
     setIsStreaming(true);
+    setLlmBusy(true);
 
     try {
       const engine = await getEngine({ modelId });
@@ -80,6 +82,7 @@ export default function useWebLlm() {
       return fullText;
     } finally {
       setIsStreaming(false);
+      setLlmBusy(false);
     }
   };
 

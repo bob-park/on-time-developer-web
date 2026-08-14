@@ -59,7 +59,7 @@ export default function Chatbot() {
       >
         <div className="flex flex-row items-center justify-between gap-2 p-3">
           <span className="flex-none font-bold">💬 {t('title')}</span>
-          <ModelSelect disabled={isStreaming} />
+          <ModelSelect disabled={status === 'loading' || isStreaming} />
           <button type="button" className="btn btn-ghost btn-sm btn-circle flex-none" onClick={() => setOpen(false)}>
             ✕
           </button>

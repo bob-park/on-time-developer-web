@@ -65,7 +65,7 @@ export default function ReportPanel({ from, to }: Readonly<{ from: string; to: s
       <div className="flex flex-row flex-wrap items-center justify-between gap-2">
         <span className="text-sm opacity-70">{t('commits', { count: commits.length })}</span>
         <div className="flex flex-row items-center gap-2">
-          <ModelSelect disabled={isStreaming} />
+          <ModelSelect disabled={status === 'loading' || isStreaming} />
           <button
             type="button"
             className="btn btn-primary btn-sm"
