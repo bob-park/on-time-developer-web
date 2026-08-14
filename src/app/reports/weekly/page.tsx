@@ -1,3 +1,5 @@
+import WeeklyReportContents from './_components/WeeklyReportContents';
+
 export default function WeeklyReportPage() {
-  return <div className="p-6" />;
+  return <WeeklyReportContents />;
 }
