@@ -96,10 +96,10 @@ export default function DashboardContents() {
         <div className="flex flex-row items-end gap-3">
           {dailyCounts.map((day) => (
             <div key={day.label} className="flex flex-1 flex-col items-center gap-1">
-              <span className="text-xs opacity-70">{day.count}</span>
-              <div className="flex h-24 w-full items-end justify-center">
+              <div className="flex h-24 w-full flex-col items-center justify-end gap-0.5">
+                <span className="text-xs opacity-70">{day.count}</span>
                 <div
-                  className="bg-primary w-full max-w-10 rounded-t"
+                  className="bg-primary min-h-1 w-full max-w-10 rounded-t"
                   style={{ height: `${(day.count / maxDaily) * 100}%`, opacity: day.count === maxDaily ? 1 : 0.55 }}
                 />
               </div>
