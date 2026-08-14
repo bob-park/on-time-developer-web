@@ -46,7 +46,7 @@ export const supportEngines = [
   },
 ];
 
-export const DEFAULT_MODEL_ID = 'Qwen2.5-3B-Instruct-q4f16_1-MLC';
+export const DEFAULT_MODEL_ID = 'Qwen2.5-1.5B-Instruct-q4f16_1-MLC';
 
 export const ENGINE_APP_CONFIG: AppConfig = {
   ...prebuiltAppConfig,
