@@ -17,6 +17,7 @@ type ChatMessages = {
 
 export default function useWebLlm(modelId?: string) {
   // useState
+  const [isSupport, setIsSupport] = useState<boolean>(false);
   const [status, setStatus] = useState<EngineStatus>('loading');
   const [isStreaming, setIsStreaming] = useState<boolean>(false);
   const [progress, setProgress] = useState<number>(0);
@@ -28,6 +29,16 @@ export default function useWebLlm(modelId?: string) {
       setStatus('unsupported');
       return;
     }
+
+    const ua = navigator.userAgent;
+
+    // 현재 크롬만 지원가능하도록
+    if (!ua.includes('Chrome')) {
+      setIsSupport(false);
+
+      return;
+    }
+
     getEngine({ modelId }, (_, p) => setProgress(p)).then(() => setStatus('ready'));
   }, []);
 
@@ -99,5 +110,5 @@ export default function useWebLlm(modelId?: string) {
     setIsStreaming(false);
   };
 
-  return { status, progress, messages, isStreaming, onChatCompletion: handleChatCompletion };
+  return { isSupport, status, progress, messages, isStreaming, onChatCompletion: handleChatCompletion };
 }
