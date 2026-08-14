@@ -58,5 +58,8 @@
   },
   "common": {
     "apiError": "Failed to load data."
+  },
+  "llm": {
+    "model": "LLM Model"
   }
 }
