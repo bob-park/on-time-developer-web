@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from 'react';
 
+import { useStore } from '@/shared/store/rootStore';
+
 import { v4 as uuid } from 'uuid';
 
-import { getEngine } from './engine';
+import { getEngine, subscribeProgress } from './engine';
 
 type EngineStatus = 'loading' | 'ready' | 'unsupported';
 
@@ -15,12 +17,15 @@ type ChatMessages = {
   date: Date;
 };
 
-export default function useWebLlm(modelId?: string) {
+export default function useWebLlm() {
   // state
   const [status, setStatus] = useState<EngineStatus>('loading');
   const [isStreaming, setIsStreaming] = useState<boolean>(false);
   const [progress, setProgress] = useState<number>(0);
   const [messages, setMessages] = useState<ChatMessages[]>([]);
+
+  // store
+  const modelId = useStore((state) => state.llm.modelId);
 
   // useEffect
   useEffect(() => {
@@ -29,10 +34,17 @@ export default function useWebLlm(modelId?: string) {
       return;
     }
 
-    getEngine({ modelId }, (_, p) => setProgress(p))
+    setStatus('loading');
+    setProgress(0);
+
+    const unsubscribe = subscribeProgress((_, p) => setProgress(p));
+
+    getEngine({ modelId })
       .then(() => setStatus('ready'))
       .catch(() => setStatus('unsupported'));
-  }, []);
+
+    return unsubscribe;
+  }, [modelId]);
 
   // handle
   const handleGenerate = async ({
