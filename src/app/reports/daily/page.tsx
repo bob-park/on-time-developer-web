@@ -1,3 +1,5 @@
+import DailyReportContents from './_components/DailyReportContents';
+
 export default function DailyReportPage() {
-  return <div className="p-6" />;
+  return <DailyReportContents />;
 }

@@ -35,6 +35,19 @@
     "writeWeeklyReport": "이번주 주간 보고 작성",
     "empty": "이번주 커밋이 없습니다."
   },
+  "report": {
+    "dailyTitle": "일일 보고",
+    "weeklyTitle": "주간 작업 보고",
+    "generate": "✨ 보고서 생성",
+    "commits": "커밋 {count}건",
+    "result": "생성된 보고서",
+    "copy": "복사",
+    "copied": "복사됨",
+    "loading": "AI 모델 로딩 중 (최초 1회)",
+    "unsupported": "이 브라우저는 AI 기능을 지원하지 않습니다. Chrome 사용을 권장합니다.",
+    "empty": "해당 기간에 커밋이 없습니다.",
+    "placeholder": "보고서 생성 버튼을 누르면 여기에 결과가 표시됩니다."
+  },
   "chatbot": {
     "title": "고객지원",
     "placeholder": "궁금한 것을 물어보세요",

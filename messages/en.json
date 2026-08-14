@@ -35,6 +35,19 @@
     "writeWeeklyReport": "Write this week's report",
     "empty": "No commits this week."
   },
+  "report": {
+    "dailyTitle": "Daily Report",
+    "weeklyTitle": "Weekly Report",
+    "generate": "✨ Generate report",
+    "commits": "{count} commits",
+    "result": "Generated report",
+    "copy": "Copy",
+    "copied": "Copied",
+    "loading": "Loading AI model (first time only)",
+    "unsupported": "This browser does not support AI features. Chrome is recommended.",
+    "empty": "No commits in this period.",
+    "placeholder": "Press the generate button to see the result here."
+  },
   "chatbot": {
     "title": "Support",
     "placeholder": "Ask me anything",
