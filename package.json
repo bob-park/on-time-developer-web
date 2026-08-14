@@ -26,6 +26,7 @@
     "overlay-kit": "^1.9.0",
     "react": "19.2.7",
     "react-dom": "19.2.7",
+    "react-markdown": "^10.1.0",
     "sharp": "^0.35.2",
     "sockjs-client": "^1.6.1",
     "timeago-react": "^3.0.7",

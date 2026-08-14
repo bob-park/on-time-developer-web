@@ -4,12 +4,12 @@ import { useState } from 'react';
 
 import { Commit } from '@/domain/commits/apis/commits.dto';
 import CommitListItem from '@/domain/commits/components/CommitListItem';
-import ReportMarkdown from '@/domain/commits/components/ReportMarkdown';
 import { usePeriodCommits } from '@/domain/commits/queries/commits';
 import ModelSelect from '@/shared/components/llm/ModelSelect';
 import useWebLlm from '@/shared/components/llm/useWebLlm';
 
 import { useTranslations } from 'next-intl';
+import Markdown from 'react-markdown';
 
 const SYSTEM_PROMPT = `너는 개발자의 커밋 내역으로 업무 보고서를 작성하는 도우미다.
 입력은 "저장소 | 커밋 메시지" 형식의 목록이다.
@@ -102,7 +102,19 @@ export default function ReportPanel({ from, to }: Readonly<{ from: string; to: s
             </button>
           </div>
           <div className="flex-1 overflow-y-auto p-4 pt-0 text-sm">
-            {report ? <ReportMarkdown markdown={report} /> : <span className="opacity-50">{t('placeholder')}</span>}
+            {report ? (
+              <Markdown
+                components={{
+                  h2: (props) => <h2 className="mt-4 text-base font-bold first:mt-0" {...props} />,
+                  h3: (props) => <h3 className="text-primary mt-3 text-sm font-bold" {...props} />,
+                  ul: (props) => <ul className="list-disc pl-5" {...props} />,
+                }}
+              >
+                {report}
+              </Markdown>
+            ) : (
+              <span className="opacity-50">{t('placeholder')}</span>
+            )}
           </div>
         </div>
       </div>
