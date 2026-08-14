@@ -1,3 +1,5 @@
+import DashboardContents from './_components/DashboardContents';
+
 export default function DashboardPage() {
-  return <div className="p-6" />;
+  return <DashboardContents />;
 }

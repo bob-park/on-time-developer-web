@@ -20,6 +20,19 @@
     "total": "{count} commits",
     "empty": "No commits found."
   },
+  "dashboard": {
+    "title": "Dashboard",
+    "weeklyCount": "Commits this week",
+    "vsLastWeek": "vs last week",
+    "topRepo": "Top repository this week",
+    "dailyChart": "Daily commits (this week)",
+    "repoDistribution": "Commits by repository (this week)",
+    "recentCommits": "Recent commits",
+    "viewAll": "View all →",
+    "writeDailyReport": "Write today's daily report",
+    "writeWeeklyReport": "Write this week's report",
+    "empty": "No commits this week."
+  },
   "chatbot": {
     "title": "Support",
     "placeholder": "Ask me anything",
