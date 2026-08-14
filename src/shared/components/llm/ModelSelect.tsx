@@ -75,7 +75,7 @@ export default function ModelSelect({ disabled }: Readonly<{ disabled?: boolean 
           tabIndex={isDisabled ? -1 : 0}
           role="button"
           aria-label="AI model"
-          className={cx('btn btn-sm w-52 justify-between font-normal', isDisabled && 'btn-disabled')}
+          className={cx('btn btn-sm w-44 justify-between font-normal', isDisabled && 'btn-disabled')}
         >
           <span className="truncate">{currentEngine?.displayName}</span>
           {cachedIds.has(modelId) && <span className="badge badge-success badge-xs flex-none">{t('downloaded')}</span>}
