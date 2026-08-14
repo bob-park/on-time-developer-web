@@ -97,17 +97,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ant-design/v5-patch-for-react-19@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "@ant-design/v5-patch-for-react-19@npm:1.0.3"
-  peerDependencies:
-    antd: ">=5.22.6"
-    react: ">=19.0.0"
-    react-dom: ">=19.0.0"
-  checksum: 10c0/e3848c929b01a0a29a41e2886f489932e54d9665dd990c60c4b505e21740da2ef0db0d08f4dc7591651fa1f21b15227e7bb40f40280742225b4da74fd18cc899
-  languageName: node
-  linkType: hard
-
 "@babel/code-frame@npm:^7.29.7":
   version: 7.29.7
   resolution: "@babel/code-frame@npm:7.29.7"
@@ -7148,7 +7137,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "template-nextjs-app@workspace:."
   dependencies:
-    "@ant-design/v5-patch-for-react-19": "npm:^1.0.3"
     "@bob-park/eslint-config-bobpark": "npm:0.3.0-RC4-20260630"
     "@bob-park/prettier-config-bobpark": "npm:0.4.0-RC4-20260630"
     "@eslint/eslintrc": "npm:^3"

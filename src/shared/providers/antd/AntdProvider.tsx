@@ -2,7 +2,6 @@
 
 import { Theme } from '@/shared/providers/theme/ThemeProvider';
 
-import '@ant-design/v5-patch-for-react-19';
 import { ConfigProvider, theme as antdTheme } from 'antd';
 
 export default function AntdProvider({ current, children }: Readonly<{ current: Theme; children: React.ReactNode }>) {
