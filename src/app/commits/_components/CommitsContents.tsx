@@ -51,7 +51,7 @@ export default function CommitsContents() {
   });
 
   // handle
-  const handleChange = (key: keyof FilterFields) => (e: React.ChangeEvent<HTMLInputElement>) =>
+  const handleChange = (key: 'commitMessage' | 'repo' | 'branch') => (e: React.ChangeEvent<HTMLInputElement>) =>
     setFields((prev) => ({ ...prev, [key]: e.target.value }));
 
   const handleSearch = (e: React.FormEvent) => {
@@ -89,7 +89,9 @@ export default function CommitsContents() {
         />
         <RangePicker
           value={fields.range}
-          onChange={(value) => setFields((prev) => ({ ...prev, range: value as [Dayjs, Dayjs] | null }))}
+          onChange={(value) =>
+            setFields((prev) => ({ ...prev, range: value?.[0] && value?.[1] ? [value[0], value[1]] : null }))
+          }
         />
         <button type="submit" className="btn btn-primary btn-sm">
           {t('search')}
