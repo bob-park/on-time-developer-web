@@ -38,13 +38,28 @@ export default async function Header() {
         <LanguageSwitcher />
         <ThemeSwitcher current={theme} />
         <div className="dropdown dropdown-end">
-          <div tabIndex={0} role="button" className="btn btn-circle btn-ghost">
+          <div tabIndex={0} role="button" className="btn btn-ghost h-auto min-h-0 rounded-full py-1 pr-3 pl-1">
             <UserAvatar src={userinfo && `/api/v1/users/${userinfo.sub}/avatar`} username={userinfo?.name ?? '?'} />
+            <span className="text-sm font-bold">{userinfo?.name}</span>
           </div>
-          <ul tabIndex={0} className="menu dropdown-content rounded-box bg-base-200 z-10 mt-2 w-40 p-2 shadow-lg">
-            <li className="menu-title">{userinfo?.name}</li>
-            <li>
-              <a href="/logout">{t('logout')}</a>
+          <ul tabIndex={0} className="menu dropdown-content rounded-box bg-base-200 z-30 mt-2 w-52 p-2 shadow-lg">
+            <li className="pointer-events-none">
+              <div className="flex flex-col items-start gap-0 py-2">
+                <span className="font-bold">{userinfo?.name}</span>
+                <span className="text-xs opacity-60">@{userinfo?.email?.split('@')[0]}</span>
+              </div>
+            </li>
+            <li className="border-base-300 mt-1 border-t pt-1">
+              <a href="/logout">
+                <svg className="size-4" fill="none" stroke="currentColor" strokeWidth="1.7" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"
+                  />
+                </svg>
+                {t('logout')}
+              </a>
             </li>
           </ul>
         </div>
