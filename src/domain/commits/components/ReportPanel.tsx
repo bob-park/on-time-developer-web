@@ -7,6 +7,7 @@ import CommitListItem from '@/domain/commits/components/CommitListItem';
 import { usePeriodCommits } from '@/domain/commits/queries/commits';
 import ModelSelect from '@/shared/components/llm/ModelSelect';
 import useWebLlm from '@/shared/components/llm/useWebLlm';
+import PageLoading from '@/shared/components/loading/PageLoading';
 
 import { useTranslations } from 'next-intl';
 import Markdown from 'react-markdown';
@@ -95,38 +96,42 @@ export default function ReportPanel({ from, to }: Readonly<{ from: string; to: s
         </div>
       )}
 
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-        <div className="bg-base-200 rounded-box max-h-[32rem] overflow-y-auto shadow">
-          {commits.map((commit) => (
-            <CommitListItem key={commit.id} commit={commit} />
-          ))}
-          {!isLoading && commits.length === 0 && <p className="p-8 text-center opacity-60">{t('empty')}</p>}
-        </div>
+      {isLoading ? (
+        <PageLoading />
+      ) : (
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+          <div className="bg-base-200 rounded-box h-[calc(100lvh-250px)] overflow-y-auto shadow">
+            {commits.map((commit) => (
+              <CommitListItem key={commit.id} commit={commit} />
+            ))}
+            {commits.length === 0 && <p className="p-8 text-center opacity-60">{t('empty')}</p>}
+          </div>
 
-        <div className="bg-base-200 rounded-box flex max-h-[32rem] flex-col shadow">
-          <div className="flex flex-row items-center justify-between p-4 pb-2">
-            <span className="text-sm opacity-70">{t('result')}</span>
-            <button type="button" className="btn btn-ghost btn-xs" disabled={!report} onClick={handleCopy}>
-              📋 {isCopied ? t('copied') : t('copy')}
-            </button>
-          </div>
-          <div className="flex-1 overflow-y-auto p-4 pt-0 text-sm">
-            {report ? (
-              <Markdown
-                components={{
-                  h2: (props) => <h2 className="mt-4 text-base font-bold first:mt-0" {...props} />,
-                  h3: (props) => <h3 className="text-primary mt-3 text-sm font-bold" {...props} />,
-                  ul: (props) => <ul className="list-disc pl-5" {...props} />,
-                }}
-              >
-                {report}
-              </Markdown>
-            ) : (
-              <span className="opacity-50">{t('placeholder')}</span>
-            )}
+          <div className="bg-base-200 rounded-box flex h-[calc(100lvh-250px)] flex-col shadow">
+            <div className="flex flex-row items-center justify-between p-4 pb-2">
+              <span className="text-sm opacity-70">{t('result')}</span>
+              <button type="button" className="btn btn-ghost btn-xs" disabled={!report} onClick={handleCopy}>
+                📋 {isCopied ? t('copied') : t('copy')}
+              </button>
+            </div>
+            <div className="flex-1 overflow-y-auto p-4 pt-0 text-sm">
+              {report ? (
+                <Markdown
+                  components={{
+                    h2: (props) => <h2 className="mt-4 text-base font-bold first:mt-0" {...props} />,
+                    h3: (props) => <h3 className="text-primary mt-3 text-sm font-bold" {...props} />,
+                    ul: (props) => <ul className="list-disc pl-5" {...props} />,
+                  }}
+                >
+                  {report}
+                </Markdown>
+              ) : (
+                <span className="opacity-50">{t('placeholder')}</span>
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

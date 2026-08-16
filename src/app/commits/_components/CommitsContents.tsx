@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { CommitSearchRequest } from '@/domain/commits/apis/commits.dto';
 import CommitListItem from '@/domain/commits/components/CommitListItem';
 import { useCommits } from '@/domain/commits/queries/commits';
+import PageLoading from '@/shared/components/loading/PageLoading';
 import useInfinityScroll from '@/shared/hooks/useInfinityScroll';
 
 import { DatePicker } from 'antd';
@@ -27,8 +28,8 @@ function toSearchRequest(fields: FilterFields): CommitSearchRequest {
     commitMessage: fields.commitMessage || undefined,
     repo: fields.repo || undefined,
     branch: fields.branch || undefined,
-    createdDateFrom: fields.range ? fields.range[0].startOf('day').format('YYYY-MM-DDTHH:mm:ss') : undefined,
-    createdDateTo: fields.range ? fields.range[1].endOf('day').format('YYYY-MM-DDTHH:mm:ss') : undefined,
+    commitDateFrom: fields.range ? fields.range[0].startOf('day').format('YYYY-MM-DDTHH:mm:ss') : undefined,
+    commitDateTo: fields.range ? fields.range[1].endOf('day').format('YYYY-MM-DDTHH:mm:ss') : undefined,
   };
 }
 
@@ -103,13 +104,16 @@ export default function CommitsContents() {
 
       <div className="text-sm opacity-70">{t('total', { count: totalElements })}</div>
 
-      <div className="bg-base-200 rounded-box shadow">
-        {commits.map((commit) => (
-          <CommitListItem key={commit.id} commit={commit} />
-        ))}
-        {!isLoading && commits.length === 0 && <p className="p-8 text-center opacity-60">{t('empty')}</p>}
-        {isLoading && <div className="loading loading-spinner mx-auto my-8 block" />}
-      </div>
+      {isLoading ? (
+        <PageLoading />
+      ) : (
+        <div className="bg-base-200 rounded-box shadow">
+          {commits.map((commit) => (
+            <CommitListItem key={commit.id} commit={commit} />
+          ))}
+          {commits.length === 0 && <p className="p-8 text-center opacity-60">{t('empty')}</p>}
+        </div>
+      )}
 
       <div ref={bottomRef} className="h-1" />
     </div>

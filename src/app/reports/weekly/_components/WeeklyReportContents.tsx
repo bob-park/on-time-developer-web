@@ -33,9 +33,10 @@ export default function WeeklyReportContents() {
             showWeek={false}
             value={date}
             format={(value) => {
-              const start = value.startOf('isoWeek');
+              const monthStart = value.startOf('month');
+              const week = value.startOf('isoWeek').diff(monthStart.startOf('isoWeek'), 'week') + 1;
 
-              return t('weekOfMonth', { month: start.format('YYYY-MM'), week: Math.ceil(start.date() / 7) });
+              return t('weekOfMonth', { month: monthStart.format('YYYY-MM'), week });
             }}
             onChange={(value) => value && setDate(value)}
           />
