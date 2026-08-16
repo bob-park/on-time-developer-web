@@ -6,7 +6,7 @@ import { getNextPageParams } from '@/shared/api';
 import { PageRequest, PagedModel } from '@/shared/api/common.dto';
 import dayjs from '@/shared/dayjs';
 
-const DEFAULT_SORT = ['createdDate,desc'];
+const DEFAULT_SORT = ['commitDate,desc'];
 
 export function useCommits(params: CommitSearchRequest) {
   const { data, fetchNextPage, hasNextPage, isLoading } = useInfiniteQuery<
@@ -38,8 +38,8 @@ export function usePeriodCommits(from: string, to: string) {
     queryKey: ['commits', 'period', from, to],
     queryFn: () =>
       getCommits({
-        createdDateFrom: from,
-        createdDateTo: to,
+        commitDateFrom: from,
+        commitDateTo: to,
         page: 0,
         // ponytail: 기간 내 1000건 초과분은 통계에서 잘림 — 집계 API 생기면 교체
         size: 1_000,

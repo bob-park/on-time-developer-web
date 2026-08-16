@@ -9,8 +9,8 @@ export default function CommitListItem({ commit }: Readonly<{ commit: Commit }>)
         <span className="badge badge-sm badge-primary">{commit.repo}</span>
         <span className="badge badge-sm badge-info">{commit.branch}</span>
         <span className="badge badge-sm badge-warning">{commit.author}</span>
+        <span className="badge badge-sm badge-ghost">📅 {dayjs(commit.commitDate).format('YYYY-MM-DD HH:mm')}</span>
         <span className="font-mono opacity-70">{commit.commitId.slice(0, 7)}</span>
-        <span className="opacity-70">{dayjs(commit.createdDate).format('YYYY-MM-DD HH:mm')}</span>
       </div>
     </div>
   );
