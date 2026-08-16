@@ -2,7 +2,9 @@
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @plugin 'daisyui' {
-  themes: light --default, dark;
+  themes:
+    light --default,
+    dark;
 }
 
 @plugin 'daisyui/theme' {

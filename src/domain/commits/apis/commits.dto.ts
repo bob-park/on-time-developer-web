@@ -4,7 +4,9 @@ interface Commit {
   repo: string;
   branch: string;
   author: string;
+  userUniqueId: string;
   commitMessage: string;
+  commitDate: string;
   createdDate: string;
   createdBy: string;
   lastModifiedDate?: string;
@@ -16,8 +18,8 @@ type CommitSearchRequest = {
   branch?: string;
   author?: string;
   commitMessage?: string;
-  createdDateFrom?: string;
-  createdDateTo?: string;
+  commitDateFrom?: string;
+  commitDateTo?: string;
 };
 
 export type { Commit, CommitSearchRequest };

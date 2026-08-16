@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Commit } from '@/domain/commits/apis/commits.dto';
 import CommitListItem from '@/domain/commits/components/CommitListItem';
 import { usePeriodCommits } from '@/domain/commits/queries/commits';
+import PageLoading from '@/shared/components/loading/PageLoading';
 import dayjs from '@/shared/dayjs';
 
 import { useTranslations } from 'next-intl';
@@ -33,8 +34,8 @@ export default function DashboardContents() {
     WEEK_START.endOf('isoWeek').format('YYYY-MM-DDTHH:mm:ss'),
   );
 
-  const thisWeek = commits.filter((commit) => !dayjs(commit.createdDate).isBefore(WEEK_START));
-  const lastWeek = commits.filter((commit) => dayjs(commit.createdDate).isBefore(WEEK_START));
+  const thisWeek = commits.filter((commit) => !dayjs(commit.commitDate).isBefore(WEEK_START));
+  const lastWeek = commits.filter((commit) => dayjs(commit.commitDate).isBefore(WEEK_START));
 
   const diff = thisWeek.length - lastWeek.length;
 
@@ -46,7 +47,7 @@ export default function DashboardContents() {
     const day = WEEK_START.add(index, 'day');
     return {
       label: weekdays[index],
-      count: thisWeek.filter((commit) => dayjs(commit.createdDate).isSame(day, 'day')).length,
+      count: thisWeek.filter((commit) => dayjs(commit.commitDate).isSame(day, 'day')).length,
     };
   });
   const maxDaily = Math.max(1, ...dailyCounts.map((day) => day.count));
@@ -57,7 +58,7 @@ export default function DashboardContents() {
   const recent = commits.slice(0, 5);
 
   if (isLoading) {
-    return <div className="loading loading-spinner mx-auto my-24 block" />;
+    return <PageLoading />;
   }
 
   return (
